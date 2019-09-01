@@ -27,7 +27,12 @@ class App extends Component {
     if (url) {
       getFullUrl(url)
         .then(res => {
-          window.location.replace(res.data.url);
+          let location = res.data.url;
+          if (location.indexOf('http') < 0) {
+            window.location = 'http://' + location;
+          }else{
+            window.location = res.data.url;
+          }
         })
         .catch(
           err => {
@@ -85,7 +90,7 @@ class App extends Component {
                   </InputGroup.Append>
                 </InputGroup>
               </Form>
-              {shortUrl && <input readOnly ref={this.buttonRef} onClick={this.handleOnClick} className="btn btn-link short-url" value={this.createCompleteUrl()}/>}
+              {shortUrl && <input readOnly ref={this.buttonRef} onClick={this.handleOnClick} className="btn btn-link short-url" value={this.createCompleteUrl()} />}
               {error && <Alert className="mt-4" variant="danger">{error}</Alert>}
               {isCopiedToClipboard && <div className="text-muted"><small>Copied to clipboard</small></div>}
             </Col>
