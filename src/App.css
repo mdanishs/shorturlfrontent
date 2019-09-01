@@ -17,6 +17,7 @@ html, body, #root{
   padding: 5px 14px;
   background-color: lightcyan;
   transition: all ease-in 0.1s;
+  width: 100%;
 }
 
 .short-url:hover{
